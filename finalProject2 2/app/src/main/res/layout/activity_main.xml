@@ -4,15 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#055D6B">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/GameName"
+        android:layout_width="190dp"
+        android:layout_height="46dp"
+        android:text="Who Dis"
+        android:textSize="40dp"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <ImageView
+        android:id="@+id/GameLogo"
+        android:layout_width="246dp"
+        android:layout_height="208dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="360dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/GameDescript"
+        android:layout_width="333dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="32dp"
+        android:text="Ready to start guessing? "
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/GameLogo" />
+
+    <Button
+        android:id="@+id/shows"
+        android:layout_width="122dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:text="TV Shows"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:background="#FCF630"
+        app:layout_constraintEnd_toStartOf="@+id/movies"
+        app:layout_constraintTop_toBottomOf="@+id/GameDescript" />
+
+    <Button
+        android:id="@+id/movies"
+        android:layout_width="112dp"
+        android:layout_height="68dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginBottom="164dp"
+        android:text="Movies"
+        android:fontFamily="monospace"
+        android:textStyle="bold"
+        android:background="#FCF630"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
