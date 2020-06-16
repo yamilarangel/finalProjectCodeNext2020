@@ -2,6 +2,7 @@ package com.example.finalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.android.volley.toolbox.Volley;
 import com.android.volley.VolleyError;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URL;
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 //Daniela's comment
     TextView GameName;
     TextView GameDescription;
-    ImageView GameLogo;
+    ImageView ConfusedCatimg;
     Button TvShows;
     Button Movies;
     private ArrayList<Object>charactersrm;
@@ -38,6 +41,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        GameName=findViewById(R.id.GameName);
+        GameDescription=findViewById(R.id.GameDescript);
+        ConfusedCatimg=findViewById(R.id.confusedCat);
+        TvShows=findViewById(R.id.shows);
+        Movies=findViewById(R.id.movies);
+
+       ConfusedCatimg.setImageResource(R.drawable.confusedcat);
+
+        TvShows.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToshows();
+            }
+        });
+
+
+
         requestQueue= Volley.newRequestQueue(this);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
@@ -45,8 +66,13 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("request", "response:  "+ response );
-
+                        //Log.d("request", "response:  "+ response.toString());
+                        try {
+                            JSONArray data  = response.getJSONArray("results");
+                            Log.d("data",data.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     },
@@ -63,19 +89,10 @@ public class MainActivity extends AppCompatActivity {
 requestQueue.add(jsonObjectRequest); //make the request
 
 
+    }
 
-
-                    GameName=findViewById(R.id.GameName);
-        GameDescription=findViewById(R.id.GameDescript);
-        GameLogo=findViewById(R.id.GameLogo);
-        TvShows=findViewById(R.id.shows);
-        Movies=findViewById(R.id.movies);
-
-        TvShows.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // goToshows
-            }
-        });
+    public void goToshows(){
+        Intent toShows=new Intent(this,TvShowsActivity.class);
+        startActivity(toShows);
     }
 }
