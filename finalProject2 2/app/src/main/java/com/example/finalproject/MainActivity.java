@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private String URL="https://rickandmortyapi.com/api/character/";
 
     RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
