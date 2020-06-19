@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 //comment/
 public class MainActivity extends AppCompatActivity {
@@ -31,9 +32,11 @@ public class MainActivity extends AppCompatActivity {
     TextView GameName;
     TextView GameDescription;
     ImageView ConfusedCatimg;
-    Button TvShows;
-    Button Movies;
-    private ArrayList<Object>charactersrm;
+    Button GameMode;
+   // ImageView Logo1;
+    private ArrayList<JSONObject>charactersrm;
+    HashSet<String> wantedChars;
+
     private String URL="https://rickandmortyapi.com/api/character/";
 
     RequestQueue requestQueue;
@@ -46,12 +49,18 @@ public class MainActivity extends AppCompatActivity {
         GameName=findViewById(R.id.GameName);
         GameDescription=findViewById(R.id.GameDescript);
         ConfusedCatimg=findViewById(R.id.confusedCat);
-        TvShows=findViewById(R.id.shows);
-        Movies=findViewById(R.id.movies);
+        GameMode=findViewById(R.id.GameMode);
+        wantedChars= new HashSet<String>();
+        charactersrm= new ArrayList<>();
+
+        wantedChars.add("morty smith");
+        wantedChars.add("summer smith");
+        wantedChars.add("jerry smith");
+        wantedChars.add("beth smith");
+        wantedChars.add("rick sanchez");
 
        ConfusedCatimg.setImageResource(R.drawable.confusedcat);
-
-        TvShows.setOnClickListener(new View.OnClickListener() {
+        GameMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToshows();
@@ -71,6 +80,15 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             JSONArray data  = response.getJSONArray("results");
                             Log.d("data",data.toString());
+
+                            for (int i=0; i<data.length();i++){
+                               String name= data.getJSONObject(i).getString("name").toLowerCase();
+                                if (wantedChars.contains(name)){
+                                    charactersrm.add(data.getJSONObject(i));
+                                }
+                            }
+                          //  GameName.(charactersrm.get(0).getString("name"));
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -81,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
 
-                            Log.e("response" , "error: " + error);
+                            Log.e("response" , "Something went wrong");
                         }
                     }
 
